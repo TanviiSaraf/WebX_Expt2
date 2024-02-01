@@ -1,49 +1,38 @@
 // Define an interface
-interface Vehicle {
-    start(): void;
-    stop(): void;
+interface Shape {
+    calculateArea(): number;
 }
 
-// Base class with access specifiers
-class Engine {
-    private fuel: string;
+// Define a class with access specifiers and implementing Shape interface
+class Rectangle implements Shape {
+    private width: number;
+    private height: number;
 
-    constructor(fuel: string) {
-        this.fuel = fuel;
+    
+    constructor(width: number, height: number) {
+        this.width = width;
+        this.height = height;
     }
 
-    protected ignite(): void {
-        console.log(`Igniting the ${this.fuel} engine`);
-    }
-}
-
-// Derived class that inherits from Engine and implements Vehicle interface
-class Car extends Engine implements Vehicle {
-    private brand: string;
-
-    constructor(brand: string, fuel: string) {
-        super(fuel);
-        this.brand = brand;
-    }
-
-    start(): void {
-        this.ignite();
-        console.log(`${this.brand} car is started`);
-    }
-
-    stop(): void {
-        console.log(`${this.brand} car is stopped`);
-    }
-
-    drive(): void {
-        console.log(`${this.brand} car is on the move`);
+    // Public method to calculate area
+    calculateArea(): number {
+        return this.width * this.height;
     }
 }
 
-// Create an instance of the Car class
-const myCar = new Car('Toyota', 'Petrol');
+// Derived class with inheritance
+class Square extends Rectangle {
+    
+    constructor(side: number) {
+        // Call the constructor of the base class
+        super(side, side);
+    }
+}
 
-// Accessing public methods
-myCar.start();
-myCar.drive();
-myCar.stop();
+// Create instances
+const rectangle = new Rectangle(5, 10);
+const square = new Square(5);
+
+// Calculate and display areas
+console.log("Rectangle Area:", rectangle.calculateArea()); 
+console.log("Square Area:", square.calculateArea()); 
