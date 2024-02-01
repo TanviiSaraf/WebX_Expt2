@@ -13,39 +13,32 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-// Base class with access specifiers
-var Engine = /** @class */ (function () {
-    function Engine(fuel) {
-        this.fuel = fuel;
+// Define a class with access specifiers and implementing Shape interface
+var Rectangle = /** @class */ (function () {
+    // Constructor
+    function Rectangle(width, height) {
+        this.width = width;
+        this.height = height;
     }
-    Engine.prototype.ignite = function () {
-        console.log("Igniting the ".concat(this.fuel, " engine"));
+    // Public method to calculate area
+    Rectangle.prototype.calculateArea = function () {
+        return this.width * this.height;
     };
-    return Engine;
+    return Rectangle;
 }());
-// Derived class that inherits from Engine and implements Vehicle interface
-var Car = /** @class */ (function (_super) {
-    __extends(Car, _super);
-    function Car(brand, fuel) {
-        var _this = _super.call(this, fuel) || this;
-        _this.brand = brand;
-        return _this;
+// Derived class with inheritance
+var Square = /** @class */ (function (_super) {
+    __extends(Square, _super);
+    // Constructor
+    function Square(side) {
+        // Call the constructor of the base class
+        return _super.call(this, side, side) || this;
     }
-    Car.prototype.start = function () {
-        this.ignite();
-        console.log("".concat(this.brand, " car is started"));
-    };
-    Car.prototype.stop = function () {
-        console.log("".concat(this.brand, " car is stopped"));
-    };
-    Car.prototype.drive = function () {
-        console.log("".concat(this.brand, " car is on the move"));
-    };
-    return Car;
-}(Engine));
-// Create an instance of the Car class
-var myCar = new Car('Toyota', 'Petrol');
-// Accessing public methods
-myCar.start();
-myCar.drive();
-myCar.stop();
+    return Square;
+}(Rectangle));
+// Create instances
+var rectangle = new Rectangle(5, 10);
+var square = new Square(5);
+// Calculate and display areas
+console.log("Rectangle Area:", rectangle.calculateArea()); // 50
+console.log("Square Area:", square.calculateArea()); // 25
